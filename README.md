@@ -74,4 +74,4 @@ Below is an overview of the main directories and files in the project:
 - **docker-compose.yml**: Configuration file for running PostgreSQL databases and pgAdmin.
 - **init-scripts**: Directory with SQL scripts used to initialize the test databases.
 
-Each service has its own database schema and runs independently, but they communicate via REST APIs and potentially Kafka for asynchronous messaging.
+Each service has its own database schema and runs independently, but they communicate via REST APIs.
