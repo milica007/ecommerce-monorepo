@@ -1,0 +1,5 @@
+rootProject.name = 'ecommerce-monorepo'
+
+include 'user-service'
+include 'product-service'
+include 'order-service'

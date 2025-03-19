@@ -1,0 +1,74 @@
+version: "3.8"
+
+services:
+  database_order:
+    image: postgres:16-alpine
+    container_name: database_order
+    ports:
+      - "5433:5432"
+    volumes:
+      - postgres-order-data:/var/lib/postgresql/data
+    environment:
+      - POSTGRES_PASSWORD=postgres
+      - POSTGRES_USER=postgres
+      - POSTGRES_DB=order_db
+    networks:
+      - service-network
+
+  database_product:
+    image: postgres:16-alpine
+    container_name: database_product
+    ports:
+      - "5434:5432"
+    volumes:
+      - postgres-product-data:/var/lib/postgresql/data
+    environment:
+      - POSTGRES_PASSWORD=postgres
+      - POSTGRES_USER=postgres
+      - POSTGRES_DB=product_db
+    networks:
+      - service-network
+
+  database_user:
+    image: postgres:16-alpine
+    container_name: database_user
+    ports:
+      - "5435:5432"
+    volumes:
+      - postgres-user-data:/var/lib/postgresql/data
+    environment:
+      - POSTGRES_PASSWORD=postgres
+      - POSTGRES_USER=postgres
+      - POSTGRES_DB=user_db
+    networks:
+      - service-network
+
+  pgadmin:
+    image: dpage/pgadmin4
+    container_name: pgadmin
+    environment:
+      - PGADMIN_DEFAULT_EMAIL=postgres@example.com
+      - PGADMIN_DEFAULT_PASSWORD=postgres
+      - PGADMIN_CONFIG_SERVER_MODE=False
+      - PGADMIN_CONFIG_MASTER_PASSWORD_REQUIRED=False
+    ports:
+      - "8543:80"
+    depends_on:
+      - database_order
+      - database_product
+      - database_user
+    networks:
+      - service-network
+
+networks:
+  service-network:
+    name: service-network
+    driver: bridge
+
+volumes:
+  postgres-order-data:
+    driver: local
+  postgres-product-data:
+    driver: local
+  postgres-user-data:
+    driver: local

@@ -1,0 +1,24 @@
+server:
+  port: 8080
+
+spring:
+  application:
+    name: user-management-service
+  datasource:
+    url: jdbc:postgresql://localhost:5435/user_db
+    username: postgres
+    password: postgres
+    driver-class-name: org.postgresql.Driver
+  liquibase:
+    change-log: classpath:/db/changelog/db.changelog-master.xml
+  jpa:
+    hibernate:
+      ddl-auto: update
+    show-sql: true
+    properties:
+      hibernate:
+        dialect: org.hibernate.dialect.PostgreSQLDialect
+
+app:
+  jwt-secret: ShNjmvdkfBfw9eZhLkbV5nhAX00M8rUesgjHwuCFJNvRebkqiwDw04LwUFScS7ROVj6mAmeFI0dZ29UNATGvQA==
+  jwt-expiration-milliseconds: 86400000
